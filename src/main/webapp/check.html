@@ -7,7 +7,16 @@
     <link href="css/Indexstyle.css" rel="stylesheet">
 </head>
 <body>
-<form name="checker"  method="post" action="/check">
+<form name="signout" method="post" action="rest/usr/logout">
+    <table>
+        <tr>
+            <td>
+    <input type="submit" class="btn btn-warning" value="Выйти"/>
+            </td>
+        </tr>
+    </table>
+</form>
+<form name="checker"  method="post" action="rest/point">
   <table id="mainChecker">
       <tr >
       <td colspan="2" class="data"> Enter coordinats</td>
@@ -60,10 +69,10 @@
           <td></td>
           <td class="left">
               <input type="submit"  class="btn btn-warning">
-              <button class="btn btn-warning" > Выйти </button>
           </td>
       </tr>
   </table>
 </form>
+
 </body>
 </html>
