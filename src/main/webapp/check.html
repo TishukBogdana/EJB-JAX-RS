@@ -4,23 +4,22 @@
     <meta charset="UTF-8">
     <title>Shoot</title>
     <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/Indexstyle.css" rel="stylesheet">
+    <link href="css/Common.css" rel="stylesheet">
+    <link href="css/checker.css" rel="stylesheet">
+
 </head>
 <body>
-<form name="signout" method="post" action="rest/usr/logout">
-    <table>
-        <tr>
-            <td>
+<!--<form name="signout" method="post" action="rest/usr/logout">
+
     <input type="submit" class="btn btn-warning" value="Выйти"/>
-            </td>
-        </tr>
-    </table>
-</form>
+
+</form>-->
 <form name="checker"  method="post" action="rest/point">
-  <table id="mainChecker">
+  <table >
       <tr >
-      <td colspan="2" class="data"> Enter coordinats</td>
-          <td class="data"> Target</td>
+          <td colspan="2"  class="data"> Enter coordinats</td>
+
+
       </tr>
       <tr>
           <td width="5%" class="coord">X:</td>
@@ -44,9 +43,7 @@
               <input type="checkbox" name="x" value="3">
               <label >3&nbsp</label>
           </td>
-          <td rowspan="4">
-              <canvas width="400" height="400"></canvas>
-          </td>
+
       </tr>
      <tr>
          <td width="5%" class="coord">Y:</td>
@@ -73,6 +70,10 @@
       </tr>
   </table>
 </form>
+<table class="target"  >
+    <tr><th><h1>Target</h1></th></tr>
+    <tr ><td colspan="1" ><canvas id="graphen"></canvas></td></tr>
+</table>
 
 </body>
 </html>

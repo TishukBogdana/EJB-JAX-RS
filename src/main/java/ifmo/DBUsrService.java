@@ -1,6 +1,8 @@
 package ifmo;
 
 import javax.ejb.Singleton;
+import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.persistence.*;
 import java.util.List;
 
@@ -8,25 +10,14 @@ import java.util.List;
  * Created by Богдана on 20.11.2017.
  */
 
-
-public class DBService {
+@Stateless
+public class DBUsrService {
 
 
     EntityManagerFactory fact = Persistence.createEntityManagerFactory("JPAUNIT");
     EntityManager em = fact.createEntityManager();
-    private static DBService serv = new DBService();
-    public static DBService getDBService(){
-        return serv;
-    }
-    public void saveShot(Shots shot){
 
-        em.getTransaction().begin();
-        em.persist(shot);
-        em.getTransaction().commit();
-    }
-    public List<Shots> getAllShots(){
-                return  em.createQuery("from Shots ").getResultList();
-          }
+
     public void saveUsr(Usr usr){
         em.getTransaction().begin();
         em.persist(usr);

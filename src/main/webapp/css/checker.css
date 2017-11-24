@@ -1,0 +1,49 @@
+.target{
+    margin-top: 3%;
+    height: auto;
+}
+#graphen{
+    width: 100%;
+    height: 500px;
+
+}
+input[type="text"]{
+    width: 50%;
+}
+.coord{
+    text-align: center;
+}
+.data{
+    padding-top: 4px;
+    height: 30px;
+    border-bottom: 1px solid #ffa500;
+    text-align: center;
+    font-weight: 700;
+
+}
+input[type="submit"]{
+ margin-right: 1%;
+}
+
+@media screen and(max-width: 1186px){
+.target{
+ width: 70%;
+}
+
+
+}
+
+@media screen and(min-width: 1187px){
+   .target{
+        width: 50%;
+    }
+
+
+}
+
+@media screen and(max-device-width: 671px){
+  .target{
+       width: 90%  ;
+    }
+
+}

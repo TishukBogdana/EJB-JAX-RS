@@ -1,12 +1,9 @@
 package ifmo;
 
 import javax.ejb.Stateful;
-import javax.ejb.Stateless;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-
-import sun.security.provider.SHA;
 
 import java.io.Serializable;
 import java.util.List;
@@ -16,7 +13,8 @@ import java.util.List;
  */
 @Stateful
 @Path("/point")
-public class ShotService implements Serializable{
+public class ShotManader implements Serializable{
+    private DBShotServ serv = new DBShotServ();
     private List<Shots> shots;
   @POST
     public void check(@FormParam("x") float x,@FormParam("y") float y , @FormParam("r") float r){
@@ -25,7 +23,7 @@ public class ShotService implements Serializable{
         if(((x>=-r)&&(y<=r)&&(x<=0)&&(y>=0))||((x>=0)&&(y>=0)&&(y<=-x+r))||((x<=0)&&(y<=0)&&(Math.pow(x,2)+Math.pow(y,2)<=Math.pow(r,2)))){
             shot.setFit(true);}else {shot.setFit(false);}
         shots.add(shot);
-       DBService.getDBService().saveShot(shot);
+     serv.saveShot(shot);
     }
 
 }
