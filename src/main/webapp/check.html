@@ -2,28 +2,33 @@
 <html lang="en" xmlns="http://xmlns.jcp.org/jsf/html">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shoot</title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/Common.css" rel="stylesheet">
-    <link href="css/checker.css" rel="stylesheet">
-
+    <link href="css/Check.css" rel="stylesheet">
+    <script src = "js/angular.min.js"></script>
+    <script src="js/Canvas.js"></script>
 </head>
-<body>
+<body >
+
+
 <!--<form name="signout" method="post" action="rest/usr/logout">
 
     <input type="submit" class="btn btn-warning" value="Выйти"/>
 
 </form>-->
 <form name="checker"  method="post" action="rest/point">
-  <table >
+  <table class="entetData">
+
       <tr >
           <td colspan="2"  class="data"> Enter coordinats</td>
 
 
       </tr>
       <tr>
-          <td width="5%" class="coord">X:</td>
-          <td  class="left">
+          <td  class="coord">X:</td>
+          <td  >
           <input type="checkbox" name="x" value="-5">
               <label >-5&nbsp</label>
               <input type="checkbox" name="x" value="-4">
@@ -46,12 +51,12 @@
 
       </tr>
      <tr>
-         <td width="5%" class="coord">Y:</td>
-      <td  class="left"><input type="text" name="y" placeholder="(-5:3)"/></td>
+         <td  class="coord">Y:</td>
+      <td  ><input type="text" name="y" placeholder="(-5:3)"/></td>
      </tr>
       <tr>
-          <td width="5%" class="coord">R:</td>
-      <td  width="35%" class="left">
+          <td class="coord">R:</td>
+      <td   >
           <input type="checkbox" name="r" value="0">
           <label >0&nbsp</label>
           <input type="checkbox" name="r" value="1">
@@ -68,12 +73,13 @@
               <input type="submit"  class="btn btn-warning">
           </td>
       </tr>
+
   </table>
 </form>
-<table class="target"  >
-    <tr><th><h1>Target</h1></th></tr>
-    <tr ><td colspan="1" ><canvas id="graphen"></canvas></td></tr>
+<table>
+    <tr>
+       <td><canvas id="graphen" ></canvas></td>
+    </tr>
 </table>
-
 </body>
 </html>

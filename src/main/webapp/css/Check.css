@@ -1,0 +1,52 @@
+td{
+    text-align: center;
+}
+input[type="text"]{
+    width: 70%;
+}
+@media screen and (min-width: 1187px){
+    table{
+        width: 50%;
+    }
+    .entetData{
+        width: 30%;
+    }
+    #graphen{
+        width: 550px;
+        height: 550px;
+    }
+}
+@media screen and (max-width: 1186px){
+    table{
+        width: 70%;
+    }
+    .entetData{
+        width: 50%;
+    }
+    #graphen{
+        width: 550px;
+        height: 600px;
+    }
+}
+@media screen and (max-device-width: 672px){
+    table{
+        width: 90%;
+        max-width: 90%;
+
+    }
+    .entetData{
+        width: 90%;
+    }
+    #graphen{
+        width: 350px;
+        height: 450px;
+    }
+}
+.data{
+    text-align: center;
+    border-bottom: 1px solid #ffa500;
+}
+.coord{
+    width: 5%;
+    text-align: right;
+}

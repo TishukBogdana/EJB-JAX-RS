@@ -1,15 +1,15 @@
 /**
  * Created by Богдана on 29.09.2017.
  */
-window.onload = function load() {
+function load() {
     var paint = document.getElementById('graphen');
     if(paint && paint.getContext){
         var context = paint.getContext("2d");
 
-        context.moveTo(300,1);
-        context.lineTo(300,500);
-        context.moveTo(1, 350);
-        context.lineTo(600,350);
+        //context.moveTo(250,1);
+      //  context.lineTo(250,500);
+        context.moveTo(1, 250);
+        context.lineTo(500,250);
         context.strokeStyle="#ffffff";
         context.stroke();
     }
