@@ -10,16 +10,15 @@
     <script src = "js/angular.min.js"></script>
     <script src="js/Canvas.js"></script>
 </head>
-<body >
-
+<body ng-app="myApp" ng-controller="canvasController" >
 
 <!--<form name="signout" method="post" action="rest/usr/logout">
 
     <input type="submit" class="btn btn-warning" value="Выйти"/>
 
 </form>-->
-<form name="checker"  method="post" action="rest/point">
-  <table class="entetData">
+<form name="checker"  method="post"   action="rest/point"  onsubmit="return validate()" >
+  <table class="enterData ">
 
       <tr >
           <td colspan="2"  class="data"> Enter coordinats</td>
@@ -29,48 +28,49 @@
       <tr>
           <td  class="coord">X:</td>
           <td  >
-          <input type="checkbox" name="x" value="-5">
+          <input type="checkbox" name="x" ng-click="listenX(0)" value="-5">
               <label >-5&nbsp</label>
-              <input type="checkbox" name="x" value="-4">
+              <input type="checkbox" name="x" ng-click="listenX(1)" name="x" value="-4">
               <label >-4&nbsp</label>
-              <input type="checkbox" name="x" value="-3">
+              <input type="checkbox" ng-click="listenX(2)" name="x" value="-3">
               <label >-3&nbsp</label>
-              <input type="checkbox" name="x" value="-2">
+              <input type="checkbox" ng-click="listenX(3)" name="x" value="-2">
               <label >-2&nbsp</label>
-              <input type="checkbox" name="x" value="-1">
+              <input type="checkbox" ng-click="listenX(4)" name="x" value="-1">
               <label >-1&nbsp</label>
-              <input type="checkbox" name="x" value="0">
+              <input type="checkbox" ng-click="listenX(5)" name="x" value="0">
               <label >0&nbsp</label>
-              <input type="checkbox" name="x" value="1">
+              <input type="checkbox" ng-click="listenX(6)" name="x" value="1">
               <label >1&nbsp</label>
-              <input type="checkbox" name="x" value="2">
+              <input type="checkbox" ng-click="listenX(7)" name="x" value="2">
               <label >2&nbsp</label>
-              <input type="checkbox" name="x" value="3">
+              <input type="checkbox" ng-click="listenX(8)" name="x" value="3">
               <label >3&nbsp</label>
           </td>
 
       </tr>
      <tr>
          <td  class="coord">Y:</td>
-      <td  ><input type="text" name="y" placeholder="(-5:3)"/></td>
+      <td  ><input type="text" name="y" placeholder="(-5:3)" ng-blur="checkText()" ng-model="y"/></td>
      </tr>
-      <tr>
-          <td class="coord">R:</td>
+      <tr >
+          <td class="coord" >R:</td>
       <td   >
-          <input type="checkbox" name="r" value="0">
+          <input type="checkbox" name="r"   ng-click="listen(0)"  value="0">
           <label >0&nbsp</label>
-          <input type="checkbox" name="r" value="1">
+          <input type="checkbox" name="r"  ng-click="listen(1)" value="1">
           <label >1&nbsp</label>
-          <input type="checkbox" name="r" value="2">
+          <input type="checkbox" name="r"   ng-click="listen(2)" value="2">
           <label >2&nbsp</label>
-          <input type="checkbox" name="r" value="3">
+          <input type="checkbox" name="r"   ng-click="listen(3)" value="3">
           <label >3&nbsp</label>
       </td>
       </tr>
       <tr>
           <td></td>
           <td class="left">
-              <input type="submit"  class="btn btn-warning">
+              <input type="submit" ng-disabled="((y<=-5)||(y>=3)||(y===''))" class="btn btn-warning">
+
           </td>
       </tr>
 
@@ -78,8 +78,32 @@
 </form>
 <table>
     <tr>
-       <td><canvas id="graphen" ></canvas></td>
+       <td><canvas id="graphen" width="650" height="650"></canvas></td>
     </tr>
 </table>
+<table>
+    <tr>
+        <td><canvas id="graphen_tabl" width="500" height="600"></canvas></td>
+    </tr>
+</table>
+<table >
+    <tr>
+        <td><canvas id="graphen_mob" width="350" height="350"></canvas></td>
+    </tr>
+</table>
+
+<table  >
+    <tr>
+        <td colspan="4">Результаты</td>
+    </tr>
+    <tr>
+        <td>X:</td>
+        <td>Y:</td>
+        <td>R:</td>
+        <td>Попадание:</td>
+
+    </tr>
+</table>
+
 </body>
 </html>

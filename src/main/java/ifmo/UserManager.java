@@ -19,7 +19,7 @@ import javax.ws.rs.core.Context;
 @Path(value = "/usr")
 public class UserManager {
 @EJB
- private    DBUsrService serv =  new DBUsrService() ;
+ private    DBUsrService serv  ;
 @EJB
 private Sender sender;
     @Path("/signup")
@@ -30,7 +30,7 @@ try {
    serv.saveUsr(usr);
    req.getSession().setAttribute("login", login);
    String msg = login+"присоединился к системе ";
-   sender.sendMsg(msg);
+//   sender.sendMsg(msg);
   resp.sendRedirect("http://localhost:8080/laba4-1.0/check.html");
 }catch (Exception e){e.printStackTrace();}
     }
@@ -43,7 +43,7 @@ try {
             if (check) {
                 req.getSession().setAttribute("login", login);
                 String msg = login+"вошел в систему";
-                sender.sendMsg(msg);
+              //  sender.sendMsg(msg);
                 resp.sendRedirect("http://localhost:8080/laba4-1.0/check.html");
             } else {
                 resp.sendRedirect("http://localhost:8080/laba4-1.0/index.html");
@@ -69,7 +69,7 @@ try {
     public void logOut(@Context HttpServletRequest req, @Context HttpServletResponse resp){
         try {
             String msg = req.getSession().getAttribute("login")+"вышел из сети";
-            sender.sendMsg(msg);
+          //  sender.sendMsg(msg);
             req.getSession().invalidate();
             resp.sendRedirect("http://localhost:8080/laba4-1.0/index.html");
         }catch(Exception e){}

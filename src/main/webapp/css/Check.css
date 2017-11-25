@@ -1,6 +1,7 @@
-td{
+table{
     text-align: center;
 }
+
 input[type="text"]{
     width: 70%;
 }
@@ -8,25 +9,37 @@ input[type="text"]{
     table{
         width: 50%;
     }
-    .entetData{
+    .enterData{
         width: 30%;
     }
-    #graphen{
-        width: 550px;
-        height: 550px;
+    #graphen_tabl{
+        display: none;
+    }
+    #graphen_mob{
+        display: none;
+    }
+    #results{
+        position: absolute;
+  top: 0;
+        left: 0;
+       float: left;
+
     }
 }
 @media screen and (max-width: 1186px){
     table{
         width: 70%;
     }
-    .entetData{
+    .enterData{
         width: 50%;
     }
     #graphen{
-        width: 550px;
-        height: 600px;
+   display: none;
     }
+    #graphen_mob{
+        display: none;
+    }
+
 }
 @media screen and (max-device-width: 672px){
     table{
@@ -34,12 +47,18 @@ input[type="text"]{
         max-width: 90%;
 
     }
-    .entetData{
+    .enterData{
         width: 90%;
     }
+    #graphen_mob{
+        display: inherit;
+        margin:auto;
+    }
     #graphen{
-        width: 350px;
-        height: 450px;
+       display: none;
+    }
+    #graphen_tabl{
+        display: none;
     }
 }
 .data{

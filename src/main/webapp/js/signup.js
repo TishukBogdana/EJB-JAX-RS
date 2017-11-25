@@ -46,7 +46,6 @@ function checkForm() {
 
 
     return true;
-    window
 }
 window.onload = function load() {
     var paint = document.getElementById('graphen');

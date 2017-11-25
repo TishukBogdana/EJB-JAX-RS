@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Stateful
 @Path("/point")
-public class ShotManader implements Serializable{
+public class ShotManager implements Serializable{
     private DBShotServ serv = new DBShotServ();
     private List<Shots> shots;
   @POST
