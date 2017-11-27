@@ -8,21 +8,21 @@
     <link href="css/Common.css" rel="stylesheet">
     <link href="css/Check.css" rel="stylesheet">
     <script src = "js/angular.min.js"></script>
+<script src ="js/jquery-1.4.2.min.js"></script>
+    <script src="js/amq_jquery_adapter.js"></script>
+    <script src ="js/amq.js"></script>
     <script src="js/Canvas.js"></script>
 
+
 </head>
-<body ng-app="myApp" >
+<body ng-app="myApp" onresize="window.location.reload()" >
 
-<!--<form name="signout" method="post" action="rest/usr/logout">
 
-    <input type="submit" class="btn btn-warning" value="Выйти"/>
-
-</form>-->
 <form name="checker"  method="post"   action="rest/point/check"  onsubmit="return validate()" >
   <table class="enterData " ng-controller="canvasController" >
 
       <tr >
-          <td colspan="2"  class="data"> Enter coordinats</td>
+          <td colspan="2"  class="data"> Прицельтесь </td>
 
 
       </tr>
@@ -92,13 +92,13 @@
         <td><canvas id="graphen_mob" width="350" height="350" ng-click="click('graphen_mob')"></canvas></td>
     </tr>
 </table>
-<div class="buttons">
+<div >
     <form name="logout" action="rest/usr/logout" method="post">
 
 <input type="submit" id="check_table"  class="btn btn-warning" value="Выйти"/>
     </form>
 </div>
-<div class="buttons" ng-controller="resultController">
+<div  ng-controller="resultController">
     <input type="button" class="btn btn-warning" id="show" ng-click="show_table()" value="Показать таблицу результатов"/>
 <table >
 

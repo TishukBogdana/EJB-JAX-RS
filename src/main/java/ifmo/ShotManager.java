@@ -43,7 +43,6 @@ try {
     list.add(shot);
     serv.saveShot(shot);
     resp.sendRedirect("http://localhost:8080/laba4-1.0/check.html");
-    serv.saveShot(shot);
 }catch (Exception e){}
     }
     @GET

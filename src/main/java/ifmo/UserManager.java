@@ -30,8 +30,8 @@ try {
    serv.saveUsr(usr);
    req.getSession().setAttribute("login", login);
    req.getSession().setAttribute("shots", new ArrayList<Shots>());
-   String msg = login+"присоединился к системе ";
- //  sender.sendMsg(msg);
+   String msg = "user: "+login+" joined system ";
+ sender.sendMsg(msg);
   resp.sendRedirect("http://localhost:8080/laba4-1.0/check.html");
 }catch (Exception e){e.printStackTrace();}
     }
@@ -45,11 +45,11 @@ try {
                 req.getSession().setAttribute("login", login);
                 req.getSession().setAttribute("shots", new ArrayList<Shots>());
 
-                String msg = login+"вошел в систему";
-             //   sender.sendMsg(msg);
+                String msg = "user: "+login+" entered system";
+                sender.sendMsg(msg);
                 resp.sendRedirect("http://localhost:8080/laba4-1.0/check.html");
             } else {
-                resp.sendRedirect("http://localhost:8080/laba4-1.0/index.html");
+                resp.sendRedirect("http://localhost:8080/laba4-1.0/error_page.html");
             }
 
 
@@ -59,20 +59,13 @@ try {
 
     }
 
-    @Path("/checkLog")
-    @POST
-    public boolean checkLog(@FormParam("login") String login){
-        //List<Usr> list = (List<Usr>) em.createQuery("from Usr where login =:login").setParameter("login",login).getResultList();
-      //  if(list.size()==0){return true;}
-        return false;
-    }
 
     @Path("/logout")
     @POST
     public void logOut(@Context HttpServletRequest req, @Context HttpServletResponse resp){
         try {
-            String msg = req.getSession().getAttribute("login")+"вышел из сети";
-         //  sender.sendMsg(msg);
+            String msg = "user: "+req.getSession().getAttribute("login")+" escaped";
+           sender.sendMsg(msg);
             req.getSession().invalidate();
             resp.sendRedirect("http://localhost:8080/laba4-1.0/index.html");
         }catch(Exception e){}

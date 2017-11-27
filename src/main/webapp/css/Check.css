@@ -1,6 +1,4 @@
-table{
-
-
+table{margin-top: 5px;
     text-align: center;
 }
 
@@ -71,9 +69,9 @@ input[type="text"]{
     width: 30%;
     text-align: right;
 }
-.buttons{
+div{
     text-align: center;
 }
-#check_table{
-   margin-bottom: 3px;
+#check_table, #show{
+  margin-bottom: 3px;
 }

@@ -152,13 +152,26 @@ $scope.onClickCanvas=function () {
 };
  $window.onload = function () {
 
+     var amq = org.activemq.Amq;
+     amq.init({
+         uri: 'amq',
+         logging: true,
+         timeout: 20
+     });
+     var myHandler = {
+         rcvMessage: function(message)
+         {
+            alert(message.textContent);
+         }
+     };
 
+     amq.addListener('in_out','topic://in_out',myHandler.rcvMessage,{});
 var x=0;
 var y=0;
   var color = '#0000ff';
 
 
-     $http.get('rest/point/getpoints').
+  /* $http.get('rest/point/getpoints').
      then(function success(response) {
          $scope.shots = response.data;
         var len =$scope.shots.length-1;
@@ -168,12 +181,11 @@ var y=0;
 
               x = $scope.shots[i].x;
              y = $scope.shots[i].y;
-             console.log(x);
-             console.log(y);
+
              $scope.paintPoint(x, y, color);
          }
        var fit = $scope.shots[len].fit;
-         console.log(fit);
+
           if (fit===true) {
           color = '#ffff00';
           } if(fit===false){
@@ -181,7 +193,7 @@ var y=0;
           }
           $scope.paintPoint($scope.shots[len].x, $scope.shots[len].y, color);
 
-     });
+     });*/
 
  };
  $scope.click=function clicked(arg){
@@ -259,21 +271,9 @@ app.controller('resultController', ['$scope','$http', function ($scope,$http) {
 
 }]);
 
-/*var amq = org.activemq.Amq;
-amq.init({
-    uri: 'amq',
-    logging: true,
-    timeout: 20
-});
-var myHandler =
-    {
-        rcvMessage: function(message)
-        {
-            alert("received "+message);
-        }
-    };
 
-amq.addListener("listener","topic://in_out",myHandler.rcvMessage);*/
+
+
 
 
 
