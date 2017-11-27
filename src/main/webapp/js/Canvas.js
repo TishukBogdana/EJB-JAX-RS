@@ -151,6 +151,11 @@ $scope.onClickCanvas=function () {
 
 };
  $window.onload = function () {
+     $http.get('rest/usr/secur').then(function success(resp) {
+        if(resp.data.length===0){
+            $window.location.replace('http://localhost:8080/laba4-1.0/error_page.html');
+        }
+     });
 
      var amq = org.activemq.Amq;
      amq.init({

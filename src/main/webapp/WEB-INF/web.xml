@@ -40,6 +40,7 @@
         <url-pattern>/rest/*</url-pattern>
 
     </servlet-mapping>
+
     <servlet>
 
         <servlet-name>AjaxServlet</servlet-name>

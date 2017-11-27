@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -58,8 +59,15 @@ try {
         }
 
     }
-
-
+   @GET
+   @Path("/secur")
+public List<String> secur(@Context HttpServletRequest req){
+        List<String> list = new ArrayList<>();
+        String login = (String) req.getSession().getAttribute("login");
+        if(!(login==null)){
+        list.add(login);}
+        return  list;
+   }
     @Path("/logout")
     @POST
     public void logOut(@Context HttpServletRequest req, @Context HttpServletResponse resp){
