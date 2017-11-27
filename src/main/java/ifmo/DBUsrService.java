@@ -10,7 +10,7 @@ import java.util.List;
  * Created by Богдана on 20.11.2017.
  */
 
-@Stateless
+@Stateful
 public class DBUsrService {
 
 
@@ -22,6 +22,7 @@ public class DBUsrService {
         em.getTransaction().begin();
         em.persist(usr);
         em.getTransaction().commit();
+
     }
   public boolean assertUser(String login, String password) throws NoResultException{
         try {

@@ -2,7 +2,9 @@
  * Created by Богдана on 29.09.2017.
  */
 var app = angular.module("myApp",[]);
+
 angular.element(document).ready(function () {
+
     var paint = document.getElementById('graphen');
     var context = paint.getContext("2d");
         var width = document.body.clientWidth;
@@ -31,8 +33,11 @@ angular.element(document).ready(function () {
 
 });
 
-app.controller('canvasController',['$scope','$window', function ($scope, $window) {
+app.controller('canvasController',['$scope','$window', '$http','$httpParamSerializer',function ($scope, $window, $http, $httpParamSerializer) {
+
+
     $scope.paint=function (r){
+        $scope.rad=r;
       var width =document.body.clientWidth;
   function paint_dep(x,y,k) {
       context.clearRect(0, 0, x, y);
@@ -59,18 +64,18 @@ app.controller('canvasController',['$scope','$window', function ($scope, $window
             var paint = document.getElementById('graphen');
             var context = paint.getContext("2d");
             if (width >= 1187) {
-            paint_dep(650,650,100);
+            paint_dep(650,650,60);
             }
             if((width>=672)&&(width<1187)){
                 paint = document.getElementById('graphen_tabl');
                  context = paint.getContext("2d");
-                paint_dep(500,600,70);
+                paint_dep(500,600,50);
 
             }
         if (width < 672) {
             paint = document.getElementById('graphen_mob');
             context = paint.getContext("2d");
-     paint_dep(350,350,50);
+     paint_dep(350,350,30);
         }
 
     };
@@ -108,54 +113,192 @@ app.controller('canvasController',['$scope','$window', function ($scope, $window
     }
  };
 
+$scope.paintPoint= function (x,y,color) {
+    var width =document.body.clientWidth;
+    var paint = document.getElementById('graphen');
+    var context = paint.getContext("2d");
+     function paint_dep_point(x,y,w,h,k,color) {
+         context.fillStyle=color;
+         context.beginPath();
+         context.arc(w+x*k,h-y*k,4,0,2*Math.PI);
+         context.fill();
+     }
+
+
+    if (width >= 1187) {
+
+        paint_dep_point(x,y,325,325,60,color);
+
+    }
+    if((width>=672)&&(width<1187)){
+        paint = document.getElementById('graphen_tabl');
+        context = paint.getContext("2d");
+        paint_dep_point(x,y,250,300,50,color);
+
+    }
+    if (width < 672) {
+        paint = document.getElementById('graphen_mob');
+        context = paint.getContext("2d");
+        paint_dep_point(x,y,175,175,30,color);
+    }
+ };
+
+
+
+
+
+$scope.onClickCanvas=function () {
+
+};
+ $window.onload = function () {
+
+
+var x=0;
+var y=0;
+  var color = '#0000ff';
+
+
+     $http.get('rest/point/getpoints').
+     then(function success(response) {
+         $scope.shots = response.data;
+        var len =$scope.shots.length-1;
+         document.forms.checker.r[$scope.shots[len].r].checked=true;
+         $scope.paint($scope.shots[len].r);
+         for(var i = 0; i < len; i++){
+
+              x = $scope.shots[i].x;
+             y = $scope.shots[i].y;
+             console.log(x);
+             console.log(y);
+             $scope.paintPoint(x, y, color);
+         }
+       var fit = $scope.shots[len].fit;
+         console.log(fit);
+          if (fit===true) {
+          color = '#ffff00';
+          } if(fit===false){
+          color = '#ff0000';
+          }
+          $scope.paintPoint($scope.shots[len].x, $scope.shots[len].y, color);
+
+     });
+
+ };
+ $scope.click=function clicked(arg){
+
+
+     var elem = document.getElementById(arg);
+     var br = elem.getBoundingClientRect();
+     var left = br.left;
+     var top = br.top;
+     var event = window.event;
+     var x = event.clientX-left;
+     var y = event.clientY-top;
+     var form = document.forms.checker;
+     var r = form.elements.r;
+     var rad=-1;
+     var newx;
+     var newy;
+     for(var i=0;i<r.length;i++){
+         if(r[i].checked===true){rad = r[i].value;}
+     }
+     var width = document.body.clientWidth;
+     if(rad!==-1){
+      if(width>=1187){
+          newx=(x-325)/60;
+          newy=(325-y)/60;
+      }if((width<1187)&&(width>=672)){
+             newx=(x-250)/50;
+             newy=(300-y)/50;
+         }
+         if(width<672){
+             newx=(x-175)/30;
+             newy=(175-y)/30;
+         }
+         var data={
+            'x': newx,
+             'y': newy,
+            'r': rad
+         };
+         console.log(x);
+         console.log(y);
+         console.log(data);
+     $http.post('rest/point/check',$httpParamSerializer({x:newx,y:newy,r:rad}));
+$window.location.reload(true);
+      }else{
+      alert("Выберите радиус :)");
+      }
+ };
+
 }]);
+
+app.controller('resultController', ['$scope','$http', function ($scope,$http) {
+
+    $scope.show_table =function () {
+        var btn = document.getElementById('show');
+        var text=btn.value;
+        if(text==='Показать таблицу результатов') {
+
+          $http.get('rest/point/getpoints').then(function success(response) {
+              $scope.shots=response.data;
+              for(var i=0;i<$scope.shots.length;i++){
+                  if($scope.shots[i].fit===true){
+                      $scope.shots[i].fit='Попадание!';
+                  }else {$scope.shots[i].fit='Мимо!';}
+              }
+              btn.value ='Скрыть таблицу результатов';
+          });
+
+        }else{
+            $scope.shots=[];
+            btn.value ='Показать таблицу результатов';
+
+        }
+    };
+
+
+}]);
+
+/*var amq = org.activemq.Amq;
+amq.init({
+    uri: 'amq',
+    logging: true,
+    timeout: 20
+});
+var myHandler =
+    {
+        rcvMessage: function(message)
+        {
+            alert("received "+message);
+        }
+    };
+
+amq.addListener("listener","topic://in_out",myHandler.rcvMessage);*/
+
+
+
+
+
+
+
 function validate() {
-  if(isNaN( document.forms.checker.y.value) ||(document.forms.checker.y.value==='')) {
+    var r = document.forms.checker.r;
+    var x = document.forms.checker.x;
+    var flagr=false;
+    var flagx=false;
+    for(var i =0;i<r.length;i++){
+        if (r[i].checked===true){flagr=true;}
+    }
+    for( i =0;i<x.length;i++){
+        if (x[i].checked===true){flagx=true;}
+    }
+  if(isNaN( document.forms.checker.y.value) ||(document.forms.checker.y.value==='')||(flagx===false)||(flagr===false)) {
+        alert('Проверьте введенные данные :)');
       return false;
-  }else{return true;}
+  }else{
+
+      return true;}
 }
 
 
 
-function clicked(arg){
-    var req = new XMLHttpRequest();
-
-    var elem = document.getElementById(arg);
-    var br = elem.getBoundingClientRect();
-    var left = br.left;
-    var top = br.top;
-    var event = window.event;
-    var x = event.clientX-left;
-    var y = event.clientY-top;
-    var form = document.forms.myform;
-    var select = form.elements.r;
-    if(select.value!=''){
-    var formdata = new FormData();
-    formdata.append('x',1);
-        formdata.append('y',1);
-        formdata.append('r',100);
-        req.open("POST", "http://localhost:3377/pip.laba.servlet-1.0/control",true);
-      req.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-
-        req.onreadystatechange =   function reqReadyStateChange(){
-            if (req.readyState == 4) {
-              var resp =   req.responseText;
-              var paint = document.getElementById('graphen');
-              var context = paint.getContext("2d");
-             if(resp==='false'){
-                 context.strokeStyle="#ff0000";
-             }
-                if(resp==='true'){
-                    context.strokeStyle="#ffff00";
-                }
-                context.moveTo(x,y);
-                context.arc(x,y,1,0,2*Math.PI);
-                context.stroke();
-
-            }
-        };
-        req.send("x="+x+"&y="+y+"&r="+select.value*100);
-
-    }else{
-        alert("Radius should be defined");
-    }}

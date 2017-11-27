@@ -1,7 +1,7 @@
 package ifmo;
 
-import org.apache.activemq.ActiveMQConnection;
-import org.apache.activemq.ActiveMQConnectionFactory;
+//import org.apache.activemq.ActiveMQConnection;
+//import org.apache.activemq.ActiveMQConnectionFactory;
 
 import javax.ejb.Stateless;
 import javax.jms.*;
@@ -11,8 +11,8 @@ import javax.jms.*;
  */
 @Stateless
 public class Sender {
-    String url = ActiveMQConnection.DEFAULT_BROKER_URL;
-    private String topic = "in_out";
+  //  String url = ActiveMQConnection.DEFAULT_BROKER_URL;
+  /*  private String topic = "in_out";
     public void sendMsg(String text){
         try{
             ConnectionFactory activeMQfact = new ActiveMQConnectionFactory(url);
@@ -24,5 +24,5 @@ public class Sender {
             Message msg = session.createTextMessage(text);
             prod.send(msg);
         }catch (Exception e){}
-    }
+    }*/
 }

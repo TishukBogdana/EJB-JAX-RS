@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
-
+import java.util.ArrayList;
 
 
 /**
@@ -29,8 +29,9 @@ try {
     Usr usr = new Usr(name, surname, login, password, email);
    serv.saveUsr(usr);
    req.getSession().setAttribute("login", login);
+   req.getSession().setAttribute("shots", new ArrayList<Shots>());
    String msg = login+"присоединился к системе ";
-//   sender.sendMsg(msg);
+ //  sender.sendMsg(msg);
   resp.sendRedirect("http://localhost:8080/laba4-1.0/check.html");
 }catch (Exception e){e.printStackTrace();}
     }
@@ -42,8 +43,10 @@ try {
             boolean check = serv.assertUser(login, password);
             if (check) {
                 req.getSession().setAttribute("login", login);
+                req.getSession().setAttribute("shots", new ArrayList<Shots>());
+
                 String msg = login+"вошел в систему";
-              //  sender.sendMsg(msg);
+             //   sender.sendMsg(msg);
                 resp.sendRedirect("http://localhost:8080/laba4-1.0/check.html");
             } else {
                 resp.sendRedirect("http://localhost:8080/laba4-1.0/index.html");
@@ -69,7 +72,7 @@ try {
     public void logOut(@Context HttpServletRequest req, @Context HttpServletResponse resp){
         try {
             String msg = req.getSession().getAttribute("login")+"вышел из сети";
-          //  sender.sendMsg(msg);
+         //  sender.sendMsg(msg);
             req.getSession().invalidate();
             resp.sendRedirect("http://localhost:8080/laba4-1.0/index.html");
         }catch(Exception e){}

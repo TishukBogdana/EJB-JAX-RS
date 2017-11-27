@@ -9,16 +9,17 @@
     <link href="css/Check.css" rel="stylesheet">
     <script src = "js/angular.min.js"></script>
     <script src="js/Canvas.js"></script>
+
 </head>
-<body ng-app="myApp" ng-controller="canvasController" >
+<body ng-app="myApp" >
 
 <!--<form name="signout" method="post" action="rest/usr/logout">
 
     <input type="submit" class="btn btn-warning" value="Выйти"/>
 
 </form>-->
-<form name="checker"  method="post"   action="rest/point"  onsubmit="return validate()" >
-  <table class="enterData ">
+<form name="checker"  method="post"   action="rest/point/check"  onsubmit="return validate()" >
+  <table class="enterData " ng-controller="canvasController" >
 
       <tr >
           <td colspan="2"  class="data"> Enter coordinats</td>
@@ -54,7 +55,7 @@
       <td  ><input type="text" name="y" placeholder="(-5:3)" ng-blur="checkText()" ng-model="y"/></td>
      </tr>
       <tr >
-          <td class="coord" >R:</td>
+          <td class="coord" >Новая мишень:</td>
       <td   >
           <input type="checkbox" name="r"   ng-click="listen(0)"  value="0">
           <label >0&nbsp</label>
@@ -69,41 +70,45 @@
       <tr>
           <td></td>
           <td class="left">
-              <input type="submit" ng-disabled="((y<=-5)||(y>=3)||(y===''))" class="btn btn-warning">
+              <input type="submit" ng-disabled="((y<=-5)||(y>=3)||(y===''))"  class="btn btn-warning" value="Стреляем!">
 
           </td>
       </tr>
 
   </table>
 </form>
-<table>
+<table ng-controller="canvasController">
     <tr>
-       <td><canvas id="graphen" width="650" height="650"></canvas></td>
+       <td><canvas id="graphen" width="650" height="650" ng-click="click('graphen')"></canvas></td>
     </tr>
 </table>
-<table>
+<table ng-controller="canvasController">
     <tr>
-        <td><canvas id="graphen_tabl" width="500" height="600"></canvas></td>
+        <td><canvas id="graphen_tabl" width="500" height="600" ng-click="click('graphen_tabl')"></canvas></td>
     </tr>
 </table>
+<table ng-controller="canvasController">
+    <tr>
+        <td><canvas id="graphen_mob" width="350" height="350" ng-click="click('graphen_mob')"></canvas></td>
+    </tr>
+</table>
+<div class="buttons">
+    <form name="logout" action="rest/usr/logout" method="post">
+
+<input type="submit" id="check_table"  class="btn btn-warning" value="Выйти"/>
+    </form>
+</div>
+<div class="buttons" ng-controller="resultController">
+    <input type="button" class="btn btn-warning" id="show" ng-click="show_table()" value="Показать таблицу результатов"/>
 <table >
-    <tr>
-        <td><canvas id="graphen_mob" width="350" height="350"></canvas></td>
-    </tr>
+
+<tr ng-repeat="shot in shots">
+    <td>{{shot.x}}</td>
+    <td>{{shot.y}}</td>
+    <td>{{shot.r}}</td>
+    <td>{{shot.fit}}</td>
+</tr>
 </table>
-
-<table  >
-    <tr>
-        <td colspan="4">Результаты</td>
-    </tr>
-    <tr>
-        <td>X:</td>
-        <td>Y:</td>
-        <td>R:</td>
-        <td>Попадание:</td>
-
-    </tr>
-</table>
-
+</div>
 </body>
 </html>

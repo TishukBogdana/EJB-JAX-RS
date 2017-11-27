@@ -1,5 +1,7 @@
 package ifmo;
 
+import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -8,6 +10,7 @@ import java.util.List;
 /**
  * Created by Богдана on 24.11.2017.
  */
+@Stateful
 public class DBShotServ {
 
     EntityManagerFactory fact = Persistence.createEntityManagerFactory("JPAUNIT");
